@@ -184,8 +184,10 @@ function calcularValorParte(parte) {
 
     // TODO: Declarar una variable que almacene el resultado de la operación
     //       entre la cantidad en existencia y el costo por unidad individual.
+    var valorTotal = parte.cantidad * parte.precio_unitario;
 
     // TODO: Retornar esa variable.
+    return valorTotal;
 
 }
 
@@ -203,12 +205,17 @@ function calcularValorParte(parte) {
 function calcularTotalInventario(listado) {
 
     // TODO: Declarar una variable acumuladora con valor inicial.
+    var total = 0;
 
     // TODO: Recorrer cada elemento del arreglo.
     //       Por cada elemento, sumar su valor individual al acumulador.
     //       Apóyate en la función calcularValorParte que ya existe.
+    listado.forEach(function(parte) {
+        total = total + calcularValorParte(parte);
+    });
 
     // TODO: Retornar el acumulador con el total calculado.
+    return total;
 
 }
 
@@ -235,8 +242,14 @@ function registrarEntrada(idParte, cantidad) {
     // TODO: Asignar a la propiedad cantidad de la parte encontrada
     //       el resultado de combinar el stock actual con la cantidad recibida.
     //       La nueva cantidad no debe superar capacidad_maxima.
+    var nuevaCantidad = parte.cantidad + cantidad;
+    if (nuevaCantidad > parte.capacidad_maxima) {
+        nuevaCantidad = parte.capacidad_maxima;
+    }
+    parte.cantidad = nuevaCantidad;
 
     // TODO: Retornar true para indicar éxito.
+    return true;
 
 }
 
@@ -262,11 +275,16 @@ function registrarSalida(idParte, cantidad) {
 
     // TODO: Evaluar si la cantidad disponible permite realizar el retiro.
     //       Si no hay suficiente stock, retornar false sin modificar nada.
+    if (parte.cantidad < cantidad) {
+        return false;
+    }
 
     // TODO: Asignar a la propiedad cantidad de la parte encontrada
     //       el valor que resulta de descontar las unidades retiradas.
+    parte.cantidad = parte.cantidad - cantidad;
 
     // TODO: Retornar true para confirmar que la operación se realizó.
+    return true;
 
 }
 
@@ -285,8 +303,10 @@ function calcularPorcentajeOcupacion(parte) {
 
     // TODO: Calcular qué proporción de la capacidad total representa
     //       la cantidad actual, expresada en porcentaje (0 a 100).
+    var porcentaje = (parte.cantidad / parte.capacidad_maxima) * 100;
 
     // TODO: Retornar ese porcentaje como número.
+    return porcentaje;
 
 }
 
@@ -305,6 +325,7 @@ function verificarStockMinimo(parte) {
 
     // TODO: Comparar la cantidad actual con el umbral de alerta.
     //       Retornar el resultado de esa comparación directamente.
+    return parte.cantidad <= parte.cantidad_minima;
 
 }
 

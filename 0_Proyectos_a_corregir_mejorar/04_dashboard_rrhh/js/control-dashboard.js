@@ -15,7 +15,6 @@
 //  Cada empleado es un objeto con: id, nombre, cargo, departamento,
 //  salario (number), asistencia (%), activo (boolean)
 // ─────────────────────────────────────────────────────────────────────────────
-
 var empleados = [
     { id: 1, nombre: "Ana Sofía Torres", cargo: "Desarrolladora Senior", departamento: "Tecnología", salario: 4800000, asistencia: 98, activo: true, avatar: "AT", color: "#3D6FFF" },
     { id: 2, nombre: "Carlos Mendoza", cargo: "Gerente Comercial", departamento: "Ventas", salario: 6200000, asistencia: 95, activo: true, avatar: "CM", color: "#FF5F3D" },

@@ -32,7 +32,7 @@ const catalogo = [
         //    Resultado esperado: "number" | Resultado actual: "string"
         //
         //    Pista: revisa la lección sobre typeof y tipos de datos primitivos.
-        precio: "59900",
+        precio: 59900,
         emoji: "👕",
         tallas: ["XS", "S", "M", "L", "XL"],
         stock: 15
@@ -41,7 +41,7 @@ const catalogo = [
         id: 2,
         nombre: "Hoodie Premium Unisex",
         categoria: "camisetas",
-        precio: "119900",  // ← mismo problema que id:1
+        precio: 119900,  // ← mismo problema que id:1
         emoji: "🧥",
         tallas: ["S", "M", "L", "XL", "XXL"],
         stock: 8
@@ -51,7 +51,7 @@ const catalogo = [
         id: 3,
         nombre: "Jean Skinny Clásico",
         categoria: "pantalones",
-        precio: "99900",
+        precio: 99900,
         emoji: "👖",
         tallas: ["28", "30", "32", "34", "36"],
         stock: 12
@@ -60,7 +60,7 @@ const catalogo = [
         id: 4,
         nombre: "Jogger Urbano",
         categoria: "pantalones",
-        precio: "79900",
+        precio: 79900,
         emoji: "🩱",
         tallas: ["S", "M", "L", "XL"],
         stock: 20
@@ -70,7 +70,7 @@ const catalogo = [
         id: 5,
         nombre: "Gorra Snapback Retro",
         categoria: "accesorios",
-        precio: "39900",
+        precio: 39900,
         emoji: "🧢",
         tallas: ["Única"],
         stock: 30
@@ -79,7 +79,7 @@ const catalogo = [
         id: 6,
         nombre: "Bolso Crossbody",
         categoria: "accesorios",
-        precio: "69900",
+        precio: 69900,
         emoji: "👜",
         tallas: ["Único"],
         stock: 10
@@ -89,7 +89,7 @@ const catalogo = [
         id: 7,
         nombre: "Tenis Urbanos Pro",
         categoria: "calzado",
-        precio: "149900",
+        precio: 149900,
         emoji: "👟",
         tallas: ["38", "39", "40", "41", "42", "43"],
         stock: 6
@@ -98,7 +98,7 @@ const catalogo = [
         id: 8,
         nombre: "Sandalias de Verano",
         categoria: "calzado",
-        precio: "49900",
+        precio: 49900,
         emoji: "🩴",
         tallas: ["36", "37", "38", "39", "40"],
         stock: 18
@@ -147,7 +147,7 @@ function renderizarProductos(lista) {
         //    Resultado: ¡Los botones de tallas no aparecen en la interfaz!
         //
         //    Pista: Revisa la lección sobre Arrays. El método correcto es Array.isArray()
-        const tallasValidas = (typeof producto.tallas === "array") ? producto.tallas : [];
+        const tallasValidas = (Array.isArray(producto.tallas)) ? producto.tallas : [];
 
         // map() genera los botones de talla como array de strings HTML
         const tallasHTML = tallasValidas
@@ -172,7 +172,7 @@ function renderizarProductos(lista) {
            devuelve \`undefined\`. Se verá en pantalla "Stock: undefined unidades".
            
            Pista: revisa los nombres exactos de las propiedades en el catálogo. -->
-      <p class="p-stock">Stock: ${producto.stok} unidades</p>
+      <p class="p-stock">Stock: ${producto.stock} unidades</p>
       <div class="tallas-row">${tallasHTML}</div>
       <button class="btn-add" onclick="agregarAlCarrito(${producto.id})">+ Agregar al carrito</button>
     `;
@@ -181,7 +181,7 @@ function renderizarProductos(lista) {
     });
 }
 
-
+  
 // ─────────────────────────────────────────────────────────────────────────────
 //  🔍  FUNCIÓN: filtrarPorCategoria(categoria)
 //  Filtra el array `catalogo` según la categoría recibida y re-renderiza.
@@ -237,11 +237,11 @@ function calcularDescuento(precio) {
     //    Pista: ¿qué diferencia hay entre `var` y `let`/`const` respecto al hoisting?
     //           Revisa la lección 6_hoisting.js de la Unidad 1.
 
+     var porcentaje = 10; 
     var precioFinal = precio - (precio * porcentaje / 100);
-    var porcentaje = 10;
-
     return precioFinal;
 }
+console.log(calcularDescuento(100000));
 
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -256,7 +256,7 @@ function agregarAlCarrito(id) {
     if (!producto) return;
 
     // Verificamos si el producto ya está en el carrito
-    var existente = carrito.find(function (item) { return item.id === id; });
+    var existente =   carrito.find(function (item) { return item.id === id; });
 
     if (existente) {
         existente.cantidad++;   // solo actualiza la cantidad
@@ -266,7 +266,7 @@ function agregarAlCarrito(id) {
         //    y se intenta asignar a `carrito` con `=`.
         //    Eso falla porque `carrito` fue declarado con `const`.
         //    ¿Qué método de Array agrega un elemento SIN reasignar la variable?
-        carrito = [...carrito, { ...producto, cantidad: 1 }];
+         carrito.push ({ ...producto, cantidad: 1 });
     }
 
     actualizarCarrito();

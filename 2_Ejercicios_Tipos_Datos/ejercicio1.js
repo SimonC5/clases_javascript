@@ -4,3 +4,12 @@ Ejercicio: Escribe una función llamada ucFirst(str) que reciba un texto y devue
 
 Pista: Los strings son inmutables, por lo que deberás crear uno nuevo combinando el primer carácter en mayúsculas y el resto de la cadena.
 */
+
+function ucFirst(str) {
+  if (!str) return str;
+  return str[0].toUpperCase() + str.slice(1);
+}
+ 
+console.log(ucFirst("hola mundo"));
+console.log(ucFirst("javascript")); 
+console.log(ucFirst(""));           
