@@ -130,3 +130,6 @@ Antes de entregar, verifica estos escenarios:
 - Consola del navegador: **F12 → Console**
 - Depuración paso a paso: **F12 → Sources → establecer breakpoints**
 - Enunciado completo y rúbrica: `ENUNCIADO_RUBRICA.md`
+
+## link de video
+https://youtu.be/lfBLLw6OJ3Y
